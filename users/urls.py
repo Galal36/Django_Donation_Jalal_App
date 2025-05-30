@@ -4,6 +4,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path("", include("allauth.urls")),
+    path("api/", include("users.api.urls")),
 ]
 # Serve media files during development only
 if settings.DEBUG:

@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     "django.contrib.sites",  # Added sites framework
     # Third-party apps
     "rest_framework",  # Django REST Framework for API development
+    "rest_framework.authtoken",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
     "phonenumber_field",  # Adds phone number validation and formatting.
     "django_countries",  # Simplifies country dropdowns and data storage (e.g., "EG" for Egypt).
     # need to install pip install django-allauth to use the apps below
@@ -165,22 +168,26 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 # Django REST Framework Configuration
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20,
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
     ],
 }
 
 # Sites Framework (if using social auth or flatpages)
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = "sadaqa-auth"
+
 SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"

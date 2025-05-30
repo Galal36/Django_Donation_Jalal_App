@@ -7,6 +7,7 @@ djangorestframework-simplejwt
 
 # Authentication and Social Login
 django-allauth==0.61.1
+dj-rest-auth 
 
 # Phone number validation and formatting
 django-phonenumber-field==7.3.0
