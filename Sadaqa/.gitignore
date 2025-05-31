@@ -1,0 +1,19 @@
+### Django Core ###
+*.log                   # Log files
+*.pot                   # Translation template files
+*.py[co]                # Python bytecode
+__pycache__/            # Python cache
+/local_settings.py      # Local dev settings (never commit!)
+.env                    # Environment variables
+.env*.local             # Local environment overrides
+db.sqlite3              # Default SQLite database
+db.sqlite3-journal      # SQLite journal file
+/media/                 # User-uploaded media files
+/staticfiles/           # Collected static files (if using collectstatic)
+/static/                # Static files (if not committed)
+
+### Virtual Environment ###
+.venv/                  # Virtual environment (common name)
+env/                    # Virtual environment (alt name)
+venv/                   # Virtual environment (alt name)
+.python-version         # Pyenv version file
