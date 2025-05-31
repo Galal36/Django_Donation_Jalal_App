@@ -36,6 +36,10 @@ INSTALLED_APPS = [
     # Local apps
     "users.apps.UsersConfig",
     "projects.apps.ProjectsConfig",
+    "engagement.apps.EngagementConfig",
+
+    #=========================================
+    
     "crispy_forms",
     "crispy_bootstrap5",
     # Django core apps
