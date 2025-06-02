@@ -229,6 +229,7 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1  # 24h expiration
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True  # Immediate confirmation on link click
 ACCOUNT_AUTHENTICATION_METHOD = "email"  # Login with email
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 # When Django app tries to send an email (like for password reset or confirmation),
 # instead of actually sending it, Django will just print the email content in the console (terminal).
