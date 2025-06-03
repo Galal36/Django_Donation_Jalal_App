@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "projects.apps.ProjectsConfig",
     "engagement.apps.EngagementConfig",
     "moderations.apps.ModerationsConfig",
+    "donation.apps.DonationConfig",
     # =========================================
     "crispy_forms",
     "crispy_bootstrap5",
