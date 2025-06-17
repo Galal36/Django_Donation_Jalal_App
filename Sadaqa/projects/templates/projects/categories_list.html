@@ -298,7 +298,7 @@ function createCategory() {
             if (xhr.responseJSON) {
                 const errors = xhr.responseJSON;
                 if (typeof errors === 'object') {
-                    errorMessage = Object.values(errors).flat().join(', ');
+                errorMessage = Object.values(errors).flat().join(', ');
                 } else {
                     errorMessage = errors;
                 }
