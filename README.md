@@ -95,8 +95,6 @@ python manage.py runserver
 
 ### Contributing
 
-This project is part of a larger crowd-funding platform where different components are developed by different team members. The donation app is maintained by Jalal.
+This project is part of a larger crowd-funding platform where different components are developed by different team members. The donation app is maintained by Jalal(me).
 
-### License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
