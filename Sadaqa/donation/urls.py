@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
 
+app_name = 'donation'
+
 urlpatterns = [
-    path('donate/', views.create_donation, name='create_donation'),
+    path('donate/', views.create_donation, name='donate'),
     path('success/', views.donation_success, name='success'),
-    path('history/', views.donation_history, name='history'),
+    path('history/', views.donation_history, name='donation_history'),
 
     # REST API endpoints
     path('api/donations/', views.DonationListCreateAPIView.as_view(), name='donation-list-create'),

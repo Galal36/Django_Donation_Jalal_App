@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import DonationForm
 from .models import Donation
 from django.contrib import messages
+from projects.models import Project
+from django.utils import timezone
 
 # REST framework imports
 from rest_framework import generics, permissions
@@ -13,17 +14,51 @@ from .serializers import DonationSerializer
 @login_required
 def create_donation(request):
     if request.method == 'POST':
-        form = DonationForm(request.POST)
-        if form.is_valid():
-            donation = form.save(commit=False)
-            donation.donor = request.user
-            donation.save()
-            messages.success(request, "Donation submitted successfully!")
-            return redirect('donation:success')
-    else:
-        form = DonationForm()
-
-    return render(request, 'donation/donate.html', {'form': form})
+        project_id = request.POST.get('project')
+        amount = request.POST.get('amount')
+        currency = request.POST.get('currency')
+        
+        try:
+            # Handle default projects
+            if project_id in ['gaza', 'somalia']:
+                project_title = 'مشروع غزة' if project_id == 'gaza' else 'مشروع الصومال'
+                # Create a temporary project if it doesn't exist
+                project, created = Project.objects.get_or_create(
+                    title=project_title,
+                    defaults={
+                        'user': request.user,
+                        'details': f'تبرع ل{project_title}',
+                        'total_target': 1000000,  # 1 million
+                        'start_date': timezone.now(),
+                        'end_date': timezone.now() + timezone.timedelta(days=365),
+                        'status': 'active'
+                    }
+                )
+            else:
+                project = Project.objects.get(id=project_id, status='active', is_cancelled=False)
+            
+            if amount and currency:
+                donation = Donation.objects.create(
+                    donor=request.user,
+                    project=project,
+                    amount=amount,
+                    currency=currency
+                )
+                messages.success(request, "تم استلام تبرعك بنجاح!")
+                return redirect('donation:success')
+            else:
+                messages.error(request, "يرجى ملء جميع الحقول المطلوبة")
+        except Project.DoesNotExist:
+            messages.error(request, "المشروع غير موجود أو غير نشط")
+    
+    # Get all active projects for the form
+    projects = Project.objects.filter(status='active', is_cancelled=False)
+    # Add default projects to the context
+    context = {
+        'projects': projects,
+        'show_default_projects': True  # This will be used in the template
+    }
+    return render(request, 'donation/donate.html', context)
 
 
 @login_required

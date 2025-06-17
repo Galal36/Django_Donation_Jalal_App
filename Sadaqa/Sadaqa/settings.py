@@ -121,7 +121,7 @@ WSGI_APPLICATION = 'Sadaqa.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "sadqa",
+        "NAME": "sadaqa",
         "USER": "postgres",
         "PASSWORD": "123",
         "HOST": "localhost",
